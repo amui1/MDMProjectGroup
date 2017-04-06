@@ -7,6 +7,7 @@ Need to do:
 Updates:
 -took out TV_id and M_id from Profile
 -V_id is the date
+-Took out ratings b/c Netflix turned it into a thumbs up/down, percentage of match
 
 
 --- Allison ---
