@@ -1,0 +1,345 @@
+
+-- Table structure for table "User" --
+CREATE TABLE "User" (
+	"u_id" int NOT NULL default '0',
+	"u_fname" varchar(100) default NULL,
+	"u_lname" varchar(100) default NULL,
+	"profile_id" int default NULL, 
+	PRIMARY KEY ("u_id")
+	FOREIGN KEY(profile_id) REFERENCES profile(id)
+);
+
+-- Dumping data for table "User" --
+INSERT INTO "User" VALUES (01,'Allison','Mui',0101);
+
+-- Table structure for table "Profile" --
+CREATE TABLE "Profile" (
+	"profile_id" varchar(100) default NULL, 
+	"profile_name" varchar(100) default NULL, 
+	"authorization" varchar(1) default NULL,
+	PRIMARY KEY ("profile_id")
+
+-- Dumping data for table "Profile" -- 
+INSERT INTO "Profile" VALUES (0101,'Allison','Y');
+
+
+-- Table structure for "Viewing_History" --
+CREATE TABLE "Viewing_History" (
+	"V_id" int default NULL,
+	"profile_id" int default NULL,
+	"P_id" int default NULL,
+	PRIMARY KEY ("V_id")
+	FOREIGN KEY (P_id) REFERENCES program(id)
+);
+
+-- Dumping data for table "Viewing_History" -- 
+INSERT INTO "Viewing_History" VALUES (040517-01, 0101, 01);
+INSERT INTO "Viewing_History" VALUES (040517-02, 0101, 02);
+INSERT INTO "Viewing_History" VALUES (040517-03, 0101, 03);
+INSERT INTO "Viewing_History" VALUES (040517-04, 0101, 04);
+INSERT INTO "Viewing_History" VALUES (040517-05, 0101, 05);
+INSERT INTO "Viewing_History" VALUES (040517-06, 0101, 06);
+INSERT INTO "Viewing_History" VALUES (040517-07, 0101, 07);
+INSERT INTO "Viewing_History" VALUES (040517-08, 0101, 08);
+INSERT INTO "Viewing_History" VALUES (040517-09, 0101, 09);
+INSERT INTO "Viewing_History" VALUES (040517-10, 0101, 10);
+INSERT INTO "Viewing_History" VALUES (040517-11, 0101, 11);
+INSERT INTO "Viewing_History" VALUES (040517-12, 0101, 12);
+
+
+-- Table structure for "Program" -- 
+CREATE TABLE "Program" (
+	"P_id" int default NULL,
+	"T_id" int default NULL,
+	"M_id" int default NULL,
+	"Name" varchar(100) default NULL,
+	"Year" int default NULL,
+	"Prim_cr_name" varchar(100) default NULL,
+	"Prim_dir_name" varchar(100) default NULL,
+	"Genre" varchar(100) default NULL, 
+	"Age_group" varchar(100) default NULL,
+	PRIMARY KEY (P_id)
+);
+
+-- Dumping data for table "TV_Show" --
+INSERT INTO "Program" VALUES (01, 01, NULL, 'Friends', 2003, 'David Crane', NULL, 'Comedy', 'TV-14');
+INSERT INTO "Program" VALUES (02, 02, NULL, '13 Reasons Why', 2017, 'Brian Yorkey', NULL, 'Crime', 'TV-MA');
+INSERT INTO "Program" VALUES (03, 03, NULL, 'How to Get Away with Murder', 2016, 'Peter Nowalk', NULL, 'Crime', 'TV-14');
+INSERT INTO "Program" VALUES (04, 04, NULL, 'Africa', 2013, 'David Attenborough', NULL, 'Science & Nature', 'TV-PG');
+INSERT INTO "Program" VALUES (05, 05, NULL, 'Greys Anatomy', 2016, 'Shonda Rhimes', NULL, 'Drama', 'TV-14');
+INSERT INTO "Program" VALUES (06, 06, NULL, 'One Tree Hill', 2011, 'Mark Schwahn', NULL, 'Romantic Drama', 'TV-14');
+INSERT INTO "Program" VALUES (07, 07, NULL, 'The Office (U.S.)', 2012, 'Greg Daniels', NULL, 'Comedy', 'TV-14');
+INSERT INTO "Program" VALUES (08, NULL, 01, 'The Angry Birds Movie', 2016, 'Clay Kaytis', NULL,'Children & Family Movies', 'PG');
+INSERT INTO "Program" VALUES (09, NULL, 02, 'White Chicks', 2004, NULL, 'Keenan Ivory Wayans', 'Comedy', 'PG-13');
+INSERT INTO "Program" VALUES (10, NULL, 03, 'Mulan II', 2004, NULL, 'Lynne Southerland', 'Children & Family Movies', 'G');
+INSERT INTO "Program" VALUES (11, NULL, 04, 'Finding Dory', 2016, NULL, 'Andrew Stanton', 'Children & Family Movies', 'PG');
+INSERT INTO "Program" VALUES (12, NULL, 05, 'Zootopia', 2016, NULL, 'Byron Howard', 'Children & Family Movies', 'PG');
+
+
+-- Table structure for 'Cast' --
+CREATE TABLE "Cast" (
+	"A_id" int default NULL,
+	"P_id" int default NULL,
+	"Role" varchar(100) default NULL, 
+	--how to make primary key & foreign key = composite key here -- 
+	PRIMARY KEY (A_id)
+	FOREIGN KEY (M_id) REFERENCES movie(id)
+	FOREIGN KEY (T_id) REFERENCES tvshow(id)
+);
+
+-- Dumping data for table 'Cast'--
+INSERT INTO "Cast" VALUES (01, 01, 'Rachel Green');
+INSERT INTO "Cast" VALUES (02, 01, 'Monica Geller');
+INSERT INTO "Cast" VALUES (03, 01, 'Phoebe Buffay');
+INSERT INTO "Cast" VALUES (04, 01, 'Joey Tribbiani');
+INSERT INTO "Cast" VALUES (05, 01, 'Chandler Bing');
+INSERT INTO "Cast" VALUES (06, 01, 'Ross Geller'
+INSERT INTO "Cast" VALUES (07, 02, 'Clay Jensen');
+INSERT INTO "Cast" VALUES (08, 02, 'Hannah');
+INSERT INTO "Cast" VALUES (09, 02, 'Mrs. Baker');
+INSERT INTO "Cast" VALUES (10, 02, 'Mr. Porter');
+INSERT INTO "Cast" VALUES (11, 02, 'Mr. Baker');
+INSERT INTO "Cast" VALUES (12, 02, 'Jessica');
+INSERT INTO "Cast" VALUES (13, 02, 'Tony');
+INSERT INTO "Cast" VALUES (14, 02, 'Alex');
+INSERT INTO "Cast" VALUES (15, 03, 'Annalise Keating');
+INSERT INTO "Cast" VALUES (16, 03, 'Nate Lahey');
+INSERT INTO "Cast" VALUES (17, 03, 'Wes Gibbins');
+INSERT INTO "Cast" VALUES (18, 03, 'Connor Walsh');
+INSERT INTO "Cast" VALUES (19, 03, 'Rebecca Sutter');
+INSERT INTO "Cast" VALUES (20, 03, 'Michaela Pratt');
+INSERT INTO "Cast" VALUES (21, 03, 'Asher Millstone');
+INSERT INTO "Cast" VALUES (22, 03, 'Laurel Castillo');
+INSERT INTO "Cast" VALUES (23, 03, 'Frank Delfino');
+INSERT INTO "Cast" VALUES (24, 03, 'Bonnie Winterbottom');
+INSERT INTO "Cast" VALUES (25, 04, 'Narrator');
+INSERT INTO "Cast" VALUES (09, 05, 'Addison Montgomery');
+INSERT INTO "Cast" VALUES (26, 05, 'Meredith Grey');
+INSERT INTO "Cast" VALUES (27, 05, 'Cristina Yang');
+INSERT INTO "Cast" VALUES (28, 05, 'Izzie Stevens');
+INSERT INTO "Cast" VALUES (29, 05, 'Alex Karev');
+INSERT INTO "Cast" VALUES (30, 05, 'Derek Shepherd');
+INSERT INTO "Cast" VALUES (31, 05, 'Miranda Bailey');
+INSERT INTO "Cast" VALUES (32, 05, 'George OMalley');
+INSERT INTO "Cast" VALUES (33, 05, 'Richard Webber');
+INSERT INTO "Cast" VALUES (34, 05, 'Preston Burke');
+INSERT INTO "Cast" VALUES (35, 05, 'Callie Torres');
+INSERT INTO "Cast" VALUES (36, 05, 'Mark Sloan');
+INSERT INTO "Cast" VALUES (37, 05, 'Lexie Grey');
+INSERT INTO "Cast" VALUES (38, 05, 'Owen Hunt');
+INSERT INTO "Cast" VALUES (39, 05, 'Arizona Robbins');
+INSERT INTO "Cast" VALUES (40, 06, 'Lucas Scott');
+INSERT INTO "Cast" VALUES (41, 06, 'Peyton Sawyer');
+INSERT INTO "Cast" VALUES (42, 06, 'Haley James Scott');
+INSERT INTO "Cast" VALUES (43, 06, 'Dan Scott');
+INSERT INTO "Cast" VALUES (44, 06, 'Brooke Davis');
+INSERT INTO "Cast" VALUES (45, 06, 'Marvin McFadden');
+INSERT INTO "Cast" VALUES (46, 06, 'Deb Scott');
+INSERT INTO "Cast" VALUES (47, 06, 'Antwon Taylor');
+INSERT INTO "Cast" VALUES (48, 06, 'Whitey');
+INSERT INTO "Cast" VALUES (49, 06, 'Karen Roe');
+INSERT INTO "Cast" VALUES (50, 06, 'Jamie Scott');
+INSERT INTO "Cast" VALUES (51, 06, 'Millicent Huxtable');
+INSERT INTO "Cast" VALUES (52, 07, 'Michael Scott');
+INSERT INTO "Cast" VALUES (53, 07, 'Jim Halpert');
+INSERT INTO "Cast" VALUES (54, 07, 'Dwight Schrute');
+INSERT INTO "Cast" VALUES (55, 07, 'Ryan Howard');
+INSERT INTO "Cast" VALUES (56, 07, 'Andy Bernard');
+INSERT INTO "Cast" VALUES (57, 07, 'Kevin Malone');
+INSERT INTO "Cast" VALUES (58, 07, 'Roy Anderson');
+INSERT INTO "Cast" VALUES (59, 07, 'Creed Bratton');
+INSERT INTO "Cast" VALUES (60, 07, 'Kelly Kapoor');
+INSERT INTO "Cast" VALUES (61, 07, 'Angela Martin');
+INSERT INTO "Cast" VALUES (62, 07, 'Oscar Martinez');
+INSERT INTO "Cast" VALUES (63, 07, 'Phyllis Vance');
+INSERT INTO "Cast" VALUES (64, 08, 'Red (voice)';
+INSERT INTO "Cast" VALUES (65, 08, 'Chuck (voice)');
+INSERT INTO "Cast" VALUES (66, 08, 'Bomb (voice)';
+INSERT INTO "Cast" VALUES (67, 08, 'Mighty Eagle (voice)');
+INSERT INTO "Cast" VALUES (68, 08, 'Leonard (voice)');
+INSERT INTO "Cast" VALUES (69, 08, 'Matilda (voice)');
+INSERT INTO "Cast" VALUES (70, 08, 'Judge Peckinpah (voice)');
+INSERT INTO "Cast" VALUES (71, 08, 'Terence (voice)');
+INSERT INTO "Cast" VALUES (72, 08, 'Photog (voice)');
+INSERT INTO "Cast" VALUES (73, 08, 'Tiny (voice)');
+INSERT INTO "Cast" VALUES (74, 08, 'Edward the Birthday Dad (voice)');
+INSERT INTO "Cast" VALUES (75, 08, 'Ross (voice)');
+INSERT INTO "Cast" VALUES (75, 08, 'Cyrus (voice)');
+INSERT INTO "Cast" VALUES (75, 08, 'Mime (voice)');
+INSERT INTO "Cast" VALUES (76, 08, 'Helene the Lunch Mom (voice)');
+INSERT INTO "Cast" VALUES (76, 08, 'Yoga Instructor (voice)');
+INSERT INTO "Cast" VALUES (77, 08, 'Olivia Blue (voice)');
+INSERT INTO "Cast" VALUES (77, 08, 'Monica the Crossing Guard (voice)');
+INSERT INTO "Cast" VALUES (78, 09, 'Kevin Copeland');
+INSERT INTO "Cast" VALUES (79, 09, 'Marcus Copeland');
+INSERT INTO "Cast" VALUES (80, 09, 'Heather Vandergeld');
+INSERT INTO "Cast" VALUES (81, 09, 'Chief Elliott Gordon');
+INSERT INTO "Cast" VALUES (82, 09, 'Agent Jake Harper');
+INSERT INTO "Cast" VALUES (83, 09, 'Warren Vandergeld');
+INSERT INTO "Cast" VALUES (84, 09, 'Karen');
+INSERT INTO "Cast" VALUES (85, 09, 'Latrell Spencer');
+INSERT INTO "Cast" VALUES (86, 09, 'Megan Vandergald');
+INSERT INTO "Cast" VALUES (87, 09, 'Agent Vincent Gomez');
+INSERT INTO "Cast" VALUES (27, 10, 'Ting Ting (voice)');
+INSERT INTO "Cast" VALUES (88, 10, 'Mulan (voice)');
+INSERT INTO "Cast" VALUES (89, 10, 'Shang (voice)');
+INSERT INTO "Cast" VALUES (90, 10, 'Mei (voice)');
+INSERT INTO "Cast" VALUES (91, 10, 'Yao (voice)');
+INSERT INTO "Cast" VALUES (92, 10, 'Ling (voice)');
+INSERT INTO "Cast" VALUES (93, 10, 'Su (voice)');
+INSERT INTO "Cast" VALUES (94, 10, 'Chien-Po (voice)');
+INSERT INTO "Cast" VALUES (95, 10, 'First Ancestor (voice)');
+INSERT INTO "Cast" VALUES (96, 11, 'Dory (voice)');
+INSERT INTO "Cast" VALUES (97, 11, 'Marlin (voice)');
+INSERT INTO "Cast" VALUES (98, 11, 'Hank (voice)');
+INSERT INTO "Cast" VALUES (99, 11, 'Destiny (voice)');
+INSERT INTO "Cast" VALUES (100, 11, 'Nemo (voice)');
+INSERT INTO "Cast" VALUES (101, 11, 'Bailey (voice)');
+INSERT INTO "Cast" VALUES (102, 11, 'Jenny (voice)');
+INSERT INTO "Cast" VALUES (103, 11, 'Charlie (voice)');
+INSERT INTO "Cast" VALUES (104, 11, 'Young Dory (voice)');
+INSERT INTO "Cast" VALUES (105, 11, 'Wife Fish (voice)');
+INSERT INTO "Cast" VALUES (106, 11, 'Husband Fish Stan (voice)');
+INSERT INTO "Cast" VALUES (107, 11, 'Sigourney Weaver (voice)');
+INSERT INTO "Cast" VALUES (108, 12, 'Judy Hopps (voice)');
+INSERT INTO "Cast" VALUES (109, 12, 'Nick Wilde (voice)');
+INSERT INTO "Cast" VALUES (110, 12, 'Chief Bogo (voice)');
+INSERT INTO "Cast" VALUES (111, 12, 'Bellwether (voice)');
+INSERT INTO "Cast" VALUES (112, 12, 'Clawhauser (voice)');
+INSERT INTO "Cast" VALUES (113, 12, 'Bonnie Hopps (voice)');
+INSERT INTO "Cast" VALUES (114, 12, 'Stu Hopps (voice)');
+INSERT INTO "Cast" VALUES (115, 12, 'Yax (voice)');
+INSERT INTO "Cast" VALUES (116, 12, 'Mayor Lionheart (voice)');
+INSERT INTO "Cast" VALUES (117, 12, 'Mrs. Otterton (voice)');
+INSERT INTO "Cast" VALUES (118, 12, 'Duke Weaselton (voice)');
+INSERT INTO "Cast" VALUES (119, 12, 'Gazelle (voice)');
+
+
+-- Table structure for 'Actor' --
+CREATE TABLE "Actor" (
+	"A_id" int default NULL,
+	"A_fname" varchar(100) default NULL, 
+	"A_lname" varchar(100) default NULL, 
+	PRIMARY KEY (A_id)
+);
+
+-- Dumping data for table 'Actor' --
+INSERT INTO "Actor" VALUES (01, 'Jennifer', 'Aniston');
+INSERT INTO "Actor" VALUES (02, 'Courteney', 'Cox');
+INSERT INTO "Actor" VALUES (03, 'Lisa', 'Kudrow');
+INSERT INTO "Actor" VALUES (04, 'Matt', 'LeBlanc');
+INSERT INTO "Actor" VALUES (05, 'Matthew', 'Perry');
+INSERT INTO "Actor" VALUES (06, 'David', 'Schwimmer');
+INSERT INTO "Actor" VALUES (07, 'Dylan', 'Minnette');
+INSERT INTO "Actor" VALUES (08, 'Katherine', 'Langford');
+INSERT INTO "Actor" VALUES (09, 'Kate', 'Walsh');
+INSERT INTO "Actor" VALUES (10, 'Derek', 'Luke');
+INSERT INTO "Actor" VALUES (11, 'Brain d Arcy', 'James');
+INSERT INTO "Actor" VALUES (12, 'Alisha', 'Boe');
+INSERT INTO "Actor" VALUES (13, 'Christian', 'Navarro');
+INSERT INTO "Actor" VALUES (14, 'Miles', 'Heizer');
+INSERT INTO "Actor" VALUES (15, 'Viola', 'Davis');
+INSERT INTO "Actor" VALUES (16, 'Billy', 'Brown');
+INSERT INTO "Actor" VALUES (17, 'Alfred', 'Enoch');
+INSERT INTO "Actor" VALUES (18, 'Jack', 'Falahee');
+INSERT INTO "Actor" VALUES (19, 'Katie', 'Findlay');
+INSERT INTO "Actor" VALUES (20, 'Aja Naomi', 'King');
+INSERT INTO "Actor" VALUES (21, 'Matt', 'McGorry');
+INSERT INTO "Actor" VALUES (22, 'Karla', 'Souza');
+INSERT INTO "Actor" VALUES (23, 'Charlie', 'Weber');
+INSERT INTO "Actor" VALUES (24, 'Liza', 'Weil');
+INSERT INTO "Actor" VALUES (25, 'David', 'Attenborough');
+INSERT INTO "Actor" VALUES (26, 'Ellen', 'Pompeo');
+INSERT INTO "Actor" VALUES (27, 'Sandra', 'Oh');
+INSERT INTO "Actor" VALUES (28, 'Katherine', 'Heigl');
+INSERT INTO "Actor" VALUES (29, 'Justin', 'Chambers');
+INSERT INTO "Actor" VALUES (30, 'Patrick', 'Dempsey');
+INSERT INTO "Actor" VALUES (31, 'Chandra', 'Wilson');
+INSERT INTO "Actor" VALUES (32, 'T.R.', 'Knight');
+INSERT INTO "Actor" VALUES (33, 'James', 'Pickens Jr.');
+INSERT INTO "Actor" VALUES (34, 'Isiah', 'Washington');
+INSERT INTO "Actor" VALUES (35, 'Sara', 'Ramirez');
+INSERT INTO "Actor" VALUES (36, 'Eric', 'Dane');
+INSERT INTO "Actor" VALUES (37, 'Chyler', 'Leigh');
+INSERT INTO "Actor" VALUES (38, 'Kevin', 'McKidd');
+INSERT INTO "Actor" VALUES (39, 'Jessica', 'Capshaw');
+INSERT INTO "Actor" VALUES (40, 'Chad Michael', 'Murray');
+INSERT INTO "Actor" VALUES (41, 'Hilarie', 'Burton');
+INSERT INTO "Actor" VALUES (42, 'Bethany Joy', 'Lenz');
+INSERT INTO "Actor" VALUES (43, 'Paul', 'Johansson');
+INSERT INTO "Actor" VALUES (44, 'Sophia', 'Bush');
+INSERT INTO "Actor" VALUES (45, 'Lee', 'Norris');
+INSERT INTO "Actor" VALUES (46, 'Barbara Alyn', 'Woods');
+INSERT INTO "Actor" VALUES (47, 'Antwon', 'Tanner');
+INSERT INTO "Actor" VALUES (48, 'Barry', 'Corbin');
+INSERT INTO "Actor" VALUES (49, 'Moira', 'Kelly');
+INSERT INTO "Actor" VALUES (50, 'Jackson', 'Brundage');
+INSERT INTO "Actor" VALUES (51, 'Lisa', 'Goldstein');
+INSERT INTO "Actor" VALUES (52, 'Steve', 'Carell');
+INSERT INTO "Actor" VALUES (53, 'John', 'Krasinski');
+INSERT INTO "Actor" VALUES (54, 'Rainn', 'Wilson');
+INSERT INTO "Actor" VALUES (55, 'B.J.', 'Novak');
+INSERT INTO "Actor" VALUES (56, 'Ed', 'Helms');
+INSERT INTO "Actor" VALUES (57, 'Brian', 'Baumgartner');
+INSERT INTO "Actor" VALUES (58, 'David', 'Denman');
+INSERT INTO "Actor" VALUES (59, 'Creed', 'Bratton');
+INSERT INTO "Actor" VALUES (60, 'Mindy', 'Kaling');
+INSERT INTO "Actor" VALUES (61, 'Angela', 'Kinsey');
+INSERT INTO "Actor" VALUES (62, 'Oscar', 'Nunez');
+INSERT INTO "Actor" VALUES (63, 'Phyllis', 'Smith');
+INSERT INTO "Actor" VALUES (64, 'Jason', 'Sudeikis');
+INSERT INTO "Actor" VALUES (65, 'Jason', 'Gad');
+INSERT INTO "Actor" VALUES (66, 'Danny', 'McBride');
+INSERT INTO "Actor" VALUES (67, 'Peter', 'Dinklage');
+INSERT INTO "Actor" VALUES (68, 'Bill', 'Hader');
+INSERT INTO "Actor" VALUES (69, 'Maya', 'Rudolph');
+INSERT INTO "Actor" VALUES (70, 'Keegan-Michael', 'Key');
+INSERT INTO "Actor" VALUES (71, 'Sean', 'Penn');
+INSERT INTO "Actor" VALUES (72, 'Tituss', 'Burgess');
+INSERT INTO "Actor" VALUES (73, 'Ike', 'Barinholtz');
+INSERT INTO "Actor" VALUES (74, 'Hannibal', 'Buress');
+INSERT INTO "Actor" VALUES (75, 'Tony', 'Hale');
+INSERT INTO "Actor" VALUES (76, 'Jillian', 'Bell');
+INSERT INTO "Actor" VALUES (77, 'Danielle', 'Brooks');
+INSERT INTO "Actor" VALUES (78, 'Shawn', 'Wayans');
+INSERT INTO "Actor" VALUES (79, 'Marlon', 'Wayans');
+INSERT INTO "Actor" VALUES (80, 'Jamie', 'King');
+INSERT INTO "Actor" VALUES (81, 'Frankie', 'Faison');
+INSERT INTO "Actor" VALUES (82, 'Lochlyn', 'Munro');
+INSERT INTO "Actor" VALUES (83, 'John', 'Heard');
+INSERT INTO "Actor" VALUES (84, 'Busy', 'Philipps');
+INSERT INTO "Actor" VALUES (85, 'Terry', 'Crews');
+INSERT INTO "Actor" VALUES (86, 'Brittany', 'Daniel');
+INSERT INTO "Actor" VALUES (87, 'Eddie', 'Velez');
+INSERT INTO "Actor" VALUES (88, 'Ming-Na', 'Wen');
+INSERT INTO "Actor" VALUES (89, 'BD', 'Wong');
+INSERT INTO "Actor" VALUES (90, 'Lucy', 'Liu');
+INSERT INTO "Actor" VALUES (91, 'Harvey', 'Fierstein');
+INSERT INTO "Actor" VALUES (92, 'Gedde', 'Watanabe');
+INSERT INTO "Actor" VALUES (93, 'Lauren', 'Tom');
+INSERT INTO "Actor" VALUES (94, 'Jerry', 'Tondo');
+INSERT INTO "Actor" VALUES (95, 'George', 'Takei');
+INSERT INTO "Actor" VALUES (96, 'Ellen', 'DeGeneres');
+INSERT INTO "Actor" VALUES (97, 'Albert', 'Brooks');
+INSERT INTO "Actor" VALUES (98, 'Ed', 'O Neill');
+INSERT INTO "Actor" VALUES (99, 'Kaitlin', 'Olson');
+INSERT INTO "Actor" VALUES (100, 'Hayden', 'Rolence');
+INSERT INTO "Actor" VALUES (101, 'Ty', 'Burrell');
+INSERT INTO "Actor" VALUES (102, 'Diane', 'Keaton');
+INSERT INTO "Actor" VALUES (103, 'Eugene', 'Levy');
+INSERT INTO "Actor" VALUES (104, 'Sloane', 'Murray');
+INSERT INTO "Actor" VALUES (105, 'Kate', 'McKinnon');
+INSERT INTO "Actor" VALUES (106, 'Bill', 'Hader');
+INSERT INTO "Actor" VALUES (107, 'Sigourney', 'Weaver');
+INSERT INTO "Actor" VALUES (108, 'Ginnifer', 'Goodwin');
+INSERT INTO "Actor" VALUES (109, 'Jason', 'Bateman');
+INSERT INTO "Actor" VALUES (110, 'Idris', 'Elba');
+INSERT INTO "Actor" VALUES (111, 'Jenny', 'Slate');
+INSERT INTO "Actor" VALUES (112, 'Nate', 'Torrence');
+INSERT INTO "Actor" VALUES (113, 'Bonnie', 'Hunt');
+INSERT INTO "Actor" VALUES (114, 'Don', 'Lake');
+INSERT INTO "Actor" VALUES (115, 'Tommy', 'Chong');
+INSERT INTO "Actor" VALUES (116, 'J.K.', 'Simmons');
+INSERT INTO "Actor" VALUES (117, 'Octavia', 'Spencer');
+INSERT INTO "Actor" VALUES (118, 'Alan', 'Tudyk');
+INSERT INTO "Actor" VALUES (119, 'Shakira', NULL);
