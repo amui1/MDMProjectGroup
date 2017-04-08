@@ -21,7 +21,7 @@ Updates:
 - added 'date' for 'Viewing_History'
 - changed the order of creating tables and insert values to make sure they could be executed in SQL server
 (eg.if FK of table B refers to PK of table A, table A must be created before table B)
-- insert 5 more record in 'Viewing_History' based on current Programs (as I think we already have enough programs and actors)
+- insert 5 more records in 'Viewing_History' based on current Programs (as I think we already have enough programs and actors)
 - also updated the diagrams in Lucidchart accordingly (https://www.lucidchart.com/documents/edit/a8b3fe0e-c629-4fce-9e51-e8b2295bce75)
 
 --- Monffy ---
