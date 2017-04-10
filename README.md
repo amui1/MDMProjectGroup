@@ -34,5 +34,6 @@ Updates:
 - LucidChart updated
 
 PS. I've also made some slight changes to the values in the tables in order to test queries, feel free to modify if you want.
+
 --- Monffy ---
 04/10/17
