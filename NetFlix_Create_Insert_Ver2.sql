@@ -72,14 +72,12 @@ CREATE TABLE "Cast" (
 INSERT INTO "User" VALUES (1,'Allison','Mui');
 INSERT INTO "User" VALUES (2,'Karishma','Desai');
 INSERT INTO "User" VALUES (3,'Monffy','Hu');
-INSERT INTO "User" VALUES (4, 'Andi', 'Family');
 
 -- Dumping data for table "Profile" -- 
 INSERT INTO "Profile" VALUES ('1-1','Allison','Y',NULL,1);
 INSERT INTO "Profile" VALUES ('2-2', 'Karishma','Y',NULL,2);
 INSERT INTO "Profile" VALUES ('3-1', 'Monffy','Y',NULL,3);
-INSERT INTO "Profile" VALUES ('4-1', 'Andi''s Mom', 'Y', NULL,4);
-INSERT INTO "Profile" VALUES ('4-2', 'Andi', 'N', '4-1',4);
+INSERT INTO "Profile" VALUES ('1-2', 'Andi', 'N', '1-1',1);
 
 -- Dumping data for table "Program" --
 INSERT INTO "Program" VALUES (1, 'TV Show', 'Friends', '2003', 'David Crane', NULL, 'Comedy', 'TV-14', 9);
