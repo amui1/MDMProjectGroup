@@ -120,6 +120,10 @@ INSERT INTO "Program" VALUES (19, 'Movie', 'The Lizzie McGuire Movie', '2003', N
 INSERT INTO "Program" VALUES (20, 'Movie', 'High School Musical', '2006', NULL, 'Kenny Ortega', 'Children and Family Movies', 'G', '5');
 INSERT INTO "Program" VALUES (21, 'Movie', 'Begin Again', '2014', NULL, 'John Carney', 'Romantic Comedy', 'R', '7.4');
 INSERT INTO "Program" VALUES (22, 'Movie', 'Hands of Stone', '2016', NULL, 'Jonathan Jakubowicz', 'Drama', 'R', '6.6');
+INSERT INTO "Program" VALUES (23, 'Movie', 'The Human Centipede 2', '2011', NULL, 'Tom Six', 'Horror', 'R', '3.9');
+INSERT INTO "Program" VALUES (24, 'TV Show', 'Jailbait', '2014', 'Jared Cohn', NULL, 'Crime', 'TV-MA', '4.3');
+INSERT INTO "Program" VALUES (25, 'Movie', 'Sharknado', '2013', NULL, 'Anthony C. Ferrante', 'Horror', 'TV-14', '3.3');
+INSERT INTO "Program" VALUES (26, 'Movie', 'Shark Lake', '2015, NULL, 'Jerry Dugan', 'Thriller', 'NR', '3.4');
 
 -- Dumping data for table "Viewing_History" -- 
 INSERT INTO "Viewing_History" VALUES ('040517-01', '0101', 1,'20170405');
