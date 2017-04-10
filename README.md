@@ -26,3 +26,10 @@ Updates:
 
 --- Monffy ---
 04/07/17
+
+Updates:
+- Changed one FK: 'u_id' of "Profile" referring to "User" 'u_id'. (FK on the many side)
+- Include 'role' as PK in "Cast" table together with A_id and P_id as there are one actor plays different roles in one movie(voice acting)
+- Uploaded NetFlix_Create_Insert_Ver2.sql / NetFlix_Drop.sql / NetFlix_Recommendation.sql (could be used to test queries)
+- LucidChart updated
+PS. I've also made some slight changes to the values in the tables in order to test queries, feel free to modify if you want.
