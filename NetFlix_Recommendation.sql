@@ -6,8 +6,8 @@ select P.genre, count(P.genre) cnt
 from Viewing_History VH
 join Program P 
 on VH.P_id = P.P_id 
-where VH.profile_id = '1-1'
-group by P.genre
+group by P.genre,VH.profile_id
+having VH.profile_id = '1-1'
 
 --- Recommendations for a certain profile
 with x as
