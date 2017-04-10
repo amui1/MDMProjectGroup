@@ -31,7 +31,7 @@ CREATE TABLE "Program" (
 	"prim_dir_name" varchar(100) default NULL,
 	"genre" varchar(100) default NULL, 
 	"age_group" varchar(100) default NULL,
-  "rating" char(4) default NULL,
+        "rating" float default NULL,
 	PRIMARY KEY (P_id)
 );
 
@@ -141,12 +141,12 @@ INSERT INTO "Viewing_History" VALUES ('112816-01', '0301', 12,'20161128');
 INSERT INTO "Viewing_History" VALUES ('091806-01', '0301', 20,'20060918');
 INSERT INTO "Viewing_History" VALUES ('121614-01', '0301', 21,'20141216');
 INSERT INTO "Viewing_History" VALUES ('032117-01', '0401', 19, '20170321');
-INSERT INTO "Viewing_History" VALUES ('032217-01', '0401', 1, '20170322');
-INSERT INTO "Viewing_History" VALUES ('032217-01', '0401', 19, '20170322');
-INSERT INTO "Viewing_History" VALUES ('032317-01', '0401', 19, '20170323');
-INSERT INTO "Viewing_History" VALUES ('032317-01', '0401', 19, '20170323');
-INSERT INTO "Viewing_History" VALUES ('032317-01', '0401', 10, '20170323');
-INSERT INTO "Viewing_History" VALUES ('032317-01', '0401', 8, '20170323');
+INSERT INTO "Viewing_History" VALUES ('032217-02', '0401', 1, '20170322');
+INSERT INTO "Viewing_History" VALUES ('032217-03', '0401', 19, '20170322');
+INSERT INTO "Viewing_History" VALUES ('032317-04', '0401', 19, '20170323');
+INSERT INTO "Viewing_History" VALUES ('032317-05', '0401', 19, '20170323');
+INSERT INTO "Viewing_History" VALUES ('032317-06', '0401', 10, '20170323');
+INSERT INTO "Viewing_History" VALUES ('032317-07', '0401', 8, '20170323');
 INSERT INTO "Viewing_History" VALUES ('032817-01', '0401', 19, '20170328');
 
 -- Dumping data for table 'Actor' --
