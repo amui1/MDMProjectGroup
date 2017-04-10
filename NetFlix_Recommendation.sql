@@ -31,5 +31,5 @@ select P.P_id
 from Viewing_History VH
 join Program P 
 on VH.P_id = P.P_id 
-where profile_id = '1-1' -- hard code the profile_id¡¡agian
+where profile_id = '1-1' -- hard code the profile_id agian
 )
