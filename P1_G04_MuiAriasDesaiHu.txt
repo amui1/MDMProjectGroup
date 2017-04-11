@@ -649,3 +649,121 @@ INSERT INTO "Cast" VALUES (177, 38, 'Mike O Donnell');
 INSERT INTO "Cast" VALUES (203, 39, 'Henry Brown');
 INSERT INTO "Cast" VALUES (204, 39, 'Mary Brown');
 INSERT INTO "Cast" VALUES (205, 39, 'Mrs Bird');
+
+--- Q1.Recommendations based on genres ---
+with x as
+(select P.genre,count(P.genre) cnt 
+from Viewing_History VH
+join Program P 
+on VH.P_id = P.P_id 
+group by P.genre,VH.profile_id
+having VH.profile_id = '1-2')　-- hard code the profile_id
+select P_id,name 
+from Program 
+where genre = (select genre from x where cnt = (select max(cnt) from x))
+and rating >= 
+	(select avg(rating) from Program where genre = 
+		(select genre from x where cnt = (select max(cnt) from x)) 
+			group by genre)
+and P_id not in
+(select P_id
+from Viewing_History
+where profile_id = '1-2') -- hard code the profile_id again
+
+--- Q2.Worst Movies ---
+select distinct name,type,genre,rating
+from Program, Viewing_History
+where Viewing_History.p_id != Program.P_id and rating < 5;
+
+--- Q3.Most watched actors ---
+select y.A_fname, y.A_lname, y.Numroles
+from
+	(select C.A_id, A.A_fname, A.A_lname, count(C.role) as Numroles
+	from Cast as C, Actor as A, 
+		(select distinct VH.P_id, P.name
+		from Viewing_History as VH, Program as P
+		where VH.P_id = P.P_id) as X
+	where X.P_id = C.P_id
+		and C.A_id = A.A_id
+	group by C.A_id, A.A_fname, A.A_lname) y
+group by y.Numroles, y.A_fname, y.A_lname
+having y.Numroles >=
+	(select max(z.Numroles)
+	from 
+		(select C.A_id, A.A_fname, A.A_lname, count(C.role) as Numroles
+		from Cast as C, Actor as A, 
+			(select distinct VH.P_id, P.name
+			from Viewing_History as VH, Program as P
+			where VH.P_id = P.P_id) as X
+		where X.P_id = C.P_id
+			and C.A_id = A.A_id
+		group by C.A_id, A.A_fname, A.A_lname) z)
+		
+--- Q4.Recommendations based on movies for tv shows ---
+select name as "Movie", genre as "Genre"
+from program
+where genre
+in
+(select genre 
+from Viewing_History V 
+left join program P 
+on V.P_id = P.P_id 
+where P.type = 'TV Show'
+and V.profile_id = '1-1')
+and type = 'Movie'
+
+--- Q5.Recommendations based on supervisor for supervisee ---
+select b.P_id, b.name, b.genre, b.age_group, b.rating 
+from 
+	(select genre
+	from
+		(select a.genre, count(a.genre) as numgenre_watched
+		from
+			(select distinct P_id, P.name, P.genre, P.age_group, P.rating
+			from Program as P,
+				(select VH1.profile_id as Supervisor_profile_id, VH1.P_id as Supervisor_program_id, VH2.profile_id as Supervisee_profile_id, VH2.P_id as Supervisee_P_id
+				from Viewing_History as VH1, Viewing_History as VH2, 
+					(select profile_id, profile_name, x.supervisee_id, x.supervisee_name
+					from Profile as P, 
+						(select profile_id as supervisee_id, profile_name as supervisee_name, supervisor_id
+						from Profile
+						where supervisor_id IS NOT NULL) x
+					where P.profile_id = x.supervisor_id) y --finds the supervisor and supervisee--
+				where VH1.profile_id = y.profile_id
+				and VH2.profile_id = y.supervisee_id) z --finds supervisor and supervisee programs--
+			where P.P_id = z.Supervisee_P_id) a --supervisee programs---
+		group by genre) d
+	group by d.numgenre_watched, d.genre
+	Having d.numgenre_watched >=
+		(select max(c.numgenre_watched) as num_genre_watched
+		from
+			(select a.genre, count(a.genre) as numgenre_watched
+			from
+				(select distinct P_id, P.name, P.genre, P.age_group, P.rating
+				from Program as P,
+					(select VH1.profile_id as Supervisor_profile_id, VH1.P_id as Supervisor_program_id, VH2.profile_id as Supervisee_profile_id, VH2.P_id as Supervisee_P_id
+					from Viewing_History as VH1, Viewing_History as VH2, 
+						(select profile_id, profile_name, x.supervisee_id, x.supervisee_name
+						from Profile as P, 
+							(select profile_id as supervisee_id, profile_name as supervisee_name, supervisor_id
+							from Profile
+							where supervisor_id IS NOT NULL) x
+						where P.profile_id = x.supervisor_id) y --finds the supervisor and supervisee--
+					where VH1.profile_id = y.profile_id
+					and VH2.profile_id = y.supervisee_id) z --finds supervisor and supervisee programs--
+				where P.P_id = z.Supervisee_P_id) a --supervisee programs---
+			group by genre) c)) f,
+	(select distinct P_id, P.name, P.genre, P.age_group, P.rating
+	from Program as P,
+		(select VH1.profile_id as Supervisor_profile_id, VH1.P_id as Supervisor_program_id, VH2.profile_id as Supervisee_profile_id, VH2.P_id as Supervisee_P_id
+		from Viewing_History as VH1, Viewing_History as VH2, 
+			(select profile_id, profile_name, x.supervisee_id, x.supervisee_name
+			from Profile as P, 
+				(select profile_id as supervisee_id, profile_name as supervisee_name, supervisor_id
+				from Profile
+				where supervisor_id IS NOT NULL) x
+			where P.profile_id = x.supervisor_id) y --finds the supervisor and supervisee--
+		where VH1.profile_id = y.profile_id
+		and VH2.profile_id = y.supervisee_id) z 
+	where z.supervisor_program_id = P.P_id) b 
+where b.genre = f.genre
